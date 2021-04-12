@@ -1,9 +1,15 @@
-
-import '../styles/globals.css'
-import type { AppProps /*, AppContext */ } from 'next/app'
+import "../styles/globals.css";
+import type { AppProps /*, AppContext */ } from "next/app";
+import { ChakraProvider, Container } from "@chakra-ui/react";
 
 function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <ChakraProvider>
+      <Container maxW="container.md" centerContent>
+        <Component {...pageProps} />
+      </Container>
+    </ChakraProvider>
+  );
 }
 
 // Only uncomment this method if you have blocking data requirements for
@@ -18,4 +24,4 @@ function App({ Component, pageProps }: AppProps) {
 //   return { ...appProps }
 // }
 
-export default App
+export default App;

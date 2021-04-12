@@ -2,18 +2,35 @@ import { useState } from "react";
 import Header from "../components/Header";
 import TaskList from "../components/TaskList";
 import { ITask } from "../interfaces";
+import { Divider } from "@chakra-ui/react";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
   const [taskList, setTaskList] = useState<ITask[]>([]);
   const addTask = (newTask: ITask): void => {
-    setTaskList([...taskList, newTask]);
+    setTaskList([newTask, ...taskList]);
+  };
+
+  const toggleCompleteTask = (index: number): void => {
+    const newTaskList = [...taskList];
+    newTaskList[index].isDone = !newTaskList[index].isDone;
+    setTaskList(newTaskList);
+  };
+
+  const deleteTask = (index: number): void => {
+    const newTaskList = taskList.filter((task, i) => i != index);
+    setTaskList(newTaskList);
   };
 
   return (
-    <div className={styles.container}>
+    <>
       <Header addTask={addTask} />
-      <TaskList list={taskList} />
-    </div>
+      <Divider />
+      <TaskList
+        list={taskList}
+        toggleCompleteTask={toggleCompleteTask}
+        deleteTask={deleteTask}
+      />
+    </>
   );
 }
