@@ -2,8 +2,6 @@ import { useState } from "react";
 import Header from "../components/Header";
 import TaskList from "../components/TaskList";
 import { ITask } from "../interfaces";
-import { Divider } from "@chakra-ui/react";
-import styles from "../styles/Home.module.css";
 
 export default function Home() {
   const [taskList, setTaskList] = useState<ITask[]>([]);
@@ -25,7 +23,6 @@ export default function Home() {
   return (
     <>
       <Header addTask={addTask} />
-      <Divider />
       <TaskList
         list={taskList}
         toggleCompleteTask={toggleCompleteTask}
